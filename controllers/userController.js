@@ -49,13 +49,13 @@ async function login(req, res) {
         const userSQL = await findByEmail(email)
         //console.log(userSQL);
         if (!userSQL) {
-            return res.status(401).json({ error: 'Hibás email' })
+            return res.status(201).json({ error: 'Hibás email' })
         }
 
         const ok = await bcrypt.compare(psw, userSQL.psw)
         //console.log(ok);
         if (!ok) {
-            return res.status(401).json({ error: 'Hibás jelszó' })
+            return res.status(201).json({ error: 'Hibás jelszó' })
         }
 
         const token = jwt.sign(

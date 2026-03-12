@@ -7,7 +7,7 @@ async function termekek(req, res) {
 
         const exist = await findByTermekNev(nev)
         if (exist) {
-            return res.status(401).json({ error: 'Ez a termék név már lézeik!' })
+            return res.status(401).json({ error: 'Ez a termék név már létezik!' })
         }
 
         if (!kategoria_id || !nev || !ar || !kep) {
