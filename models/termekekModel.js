@@ -5,7 +5,7 @@ async function addTermek(kategoria_id, nev, ar, kep) {
     const [result] = await db.query(sql, [kategoria_id, nev, ar, kep])
     //console.log(result.insertId);
     return result.insertId || null
-    
+
 }
 
 async function findByTermekId(termek_id) {
@@ -22,4 +22,22 @@ async function findByTermekNev(nev) {
     return result[0] || null
 }
 
-module.exports = {addTermek, findByTermekId, findByTermekNev}
+async function findEtel() {
+    const sql = 'SELECT * FROM termekek WHERE kategoria_id = 1'
+    const [result] = await db.query(sql)
+    return result
+}
+
+async function findItal() {
+    const sql = 'SELECT * FROM termekek WHERE kategoria_id = 2'
+    const [result] = await db.query(sql)
+    return result
+}
+
+async function findDesszert() {
+    const sql = 'SELECT * FROM termekek WHERE kategoria_id = 3'
+    const [result] = await db.query(sql)
+    return result
+}
+
+module.exports = { addTermek, findByTermekId, findByTermekNev, findEtel, findItal, findDesszert }

@@ -1,4 +1,4 @@
-const { addTermek, findByTermekNev } = require('../models/termekekModel')
+const { addTermek, findByTermekNev, findEtel, findItal, findDesszert } = require('../models/termekekModel')
 
 async function termekek(req, res) {
     try {
@@ -26,4 +26,40 @@ async function termekek(req, res) {
     }
 }
 
-module.exports = {termekek}
+//etel lekerdez
+async function getEtel(req, res) {
+    try {
+        const result = await findEtel()
+
+        return res.status(200).json(result)
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Nem sikerült lekérni az eredményeket' })
+    }
+}
+
+//ital lekerdez
+async function getItal(req, res) {
+    try {
+        const result = await findItal()
+
+        return res.status(200).json(result)
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Nem sikerült lekérni az eredményeket' })
+    }
+}
+
+//desszert lekerdez
+async function getDesszert(req, res) {
+    try {
+        const result = await findDesszert()
+
+        return res.status(200).json(result)
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Nem sikerült lekérni az eredményeket' })
+    }
+}
+
+module.exports = {termekek, getEtel, getItal, getDesszert}
