@@ -40,4 +40,16 @@ async function findDesszert() {
     return result
 }
 
-module.exports = { addTermek, findByTermekId, findByTermekNev, findEtel, findItal, findDesszert }
+async function delTermek(termek_id) {
+    const sql = 'DELETE FROM termekek WHERE termekek.termek_id = ?'
+    const [result] = await db.query(sql, [termek_id])
+    return result
+}
+
+async function putTermek(nev,ar,kep) {
+    const sql = 'UPDATE termekek SET nev = ?, ar = ?, kep = ? WHERE termekek.termek_id = 23'
+    const [result] = await db.query(sql, [nev,ar,kep])
+    return result
+}
+
+module.exports = { addTermek, findByTermekId, findByTermekNev, findEtel, findItal, findDesszert, delTermek, putTermek }
