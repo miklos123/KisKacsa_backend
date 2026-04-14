@@ -1,4 +1,4 @@
-const { addTermek, findByTermekNev, findEtel, findItal, findDesszert } = require('../models/termekekModel')
+const { addTermek, findByTermekNev, findEtel, findItal, findDesszert, putTermek, delTermek } = require('../models/termekekModel')
 
 async function termekek(req, res) {
     try {
@@ -29,6 +29,7 @@ async function termekek(req, res) {
 //etel lekerdez
 async function getEtel(req, res) {
     try {
+
         const result = await findEtel()
 
         return res.status(200).json(result)
@@ -62,4 +63,30 @@ async function getDesszert(req, res) {
     }
 }
 
-module.exports = {termekek, getEtel, getItal, getDesszert}
+//termekek torlese
+async function torolTermek(req, res) {
+    try {
+        const {termek_id} = req.params
+
+        const result = await delTermek(termek_id)
+
+        return res.status(200).json(result)
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Nem sikerült törölni a terméket' })
+    }
+}
+
+//termekek valtoztatasa
+async function valtozTermek(req, res) {
+    try {
+        const result = await putTermek()
+
+        return res.status(200).json(result)
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Nem sikerült változtatni a terméket' })
+    }
+}
+
+module.exports = {termekek, getEtel, getItal, getDesszert, torolTermek, valtozTermek}
